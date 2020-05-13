@@ -36,11 +36,45 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+from player import Player
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player('Logan', room['outside'])
 
 # Write a loop that:
-#
+direction = 0
+while direction != 'q':
+    print(f"Location: {player.room.name}\n")
+    print(f"Description: {player.room.description} \n")
+    direction = input('choose a direction N E S W: ')
+    direction = direction.lower()
+    if direction == 'n':
+        if(not hasattr(player.room, "n_to")):
+            print('\n########\nyouve hit a dead end try another route\n########\n')
+        else:
+            player.room = player.room.n_to
+    elif direction == 'e':
+        
+        if(not hasattr(player.room,"e_to")):
+            print('youve hit a dead end try another route')
+        else:
+            player.room = player.room.e_to
+    elif direction == 's':
+        
+        if(not hasattr(player.room,"s_to")):
+            print('youve hit a dead end try another route')
+        else: 
+            player.room = player.room.s_to
+    elif direction == 'w':
+        
+        if(not hasattr(player.room,"w_to")):
+            print('youve hit a dead end try another route')
+        else: 
+            player.room = player.room.w_to
+    elif direction == 'q':
+        print("game over")  
+    else: 
+        print('PLEASE ENTER A VALID DIRECTION')
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
